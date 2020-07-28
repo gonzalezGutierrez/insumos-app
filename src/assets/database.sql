@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS departaments (id INTEGER PRIMARY KEY , name TEST , responsable TEXT );
+
+CREATE TABLE IF NOT EXISTS products (id INTEGER PRIMARY KEY , name TEST, stock INTEGER , departament_id INTEGER  , img TEXT);
+
+CREATE TABLE IF NOT EXISTS delivery (id INTEGER PRIMARY KEY AUTOINCREMENT, departament_id INTEGER);
+
+CREATE TABLE IF NOT EXISTS prod_delivery(id INTEGER PRIMARY KEY AUTOINCREMENT, product_id INTEGER, amount INTEGER, delivery_id INTEGER);
+
+
+

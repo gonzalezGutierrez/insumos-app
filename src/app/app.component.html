@@ -1,29 +1,46 @@
 <ion-app>
-  <ion-split-pane contentId="main-content">
-    <ion-menu contentId="main-content" type="overlay">
-      <ion-content>
-        <ion-list id="inbox-list">
-          <ion-list-header>Inbox</ion-list-header>
-          <ion-note>hi@ionicframework.com</ion-note>
+    <ion-menu menuId="main-menu" contentId="main">
+        <ion-content>
+            <div class="menu-header-bg">
 
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i">
-              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
-              <ion-label>{{ p.title }}</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
-        </ion-list>
-
-        <ion-list id="labels-list">
-          <ion-list-header>Labels</ion-list-header>
-
-          <ion-item *ngFor="let label of labels" lines="none">
-            <ion-icon slot="start" ios="bookmark-outline" md="bookmark-sharp"></ion-icon>
-            <ion-label>{{ label }}</ion-label>
-          </ion-item>
-        </ion-list>
-      </ion-content>
+            </div>
+            <div class="header-content">
+                <img src="https://scontent.ftgz1-1.fna.fbcdn.net/v/t1.0-9/p960x960/93702704_938782589869427_7822968791461003264_o.jpg?_nc_cat=100&_nc_sid=85a577&_nc_ohc=ugDAasROsscAX8YHEYh&_nc_ht=scontent.ftgz1-1.fna&_nc_tp=6&oh=0a35d4330f2c71d96b92419bcfba15c9&oe=5EEBD7F9" alt="">
+                <ion-label>
+                    <h2>Jesús Gonzalez</h2>
+                    <span>Administrador</span>
+                </ion-label>
+            </div>
+            <div routerLink="/entrega" class="action-button">
+                <ion-button>Ver entrega</ion-button>
+            </div>
+            <ion-list class="menu-items" lines="none">
+                <ion-item routerLink="/home" class="active">
+                    <ion-icon name="pie-chart-outline"></ion-icon>
+                    Dashboard
+                </ion-item>
+                <ion-item routerLink="/insumos">
+                    <ion-icon name="basket-outline"></ion-icon>
+                    Insumos
+                </ion-item>
+                <ion-item routerLink="/departamentos">
+                    <ion-icon name="home-outline"></ion-icon>
+                    Departamentos
+                </ion-item>
+                <ion-item>
+                    <ion-icon name="newspaper-outline"></ion-icon>
+                    Entregas
+                </ion-item>
+                <ion-item routerLink="/offline">
+                    <ion-icon name="globe-outline"></ion-icon>
+                    Offline
+                </ion-item>
+                <ion-item routerLink="/auth">
+                    <ion-icon name="log-out-outline"></ion-icon>
+                    Salir
+                </ion-item>
+            </ion-list>
+        </ion-content>
     </ion-menu>
-    <ion-router-outlet id="main-content"></ion-router-outlet>
-  </ion-split-pane>
+    <ion-router-outlet id="main"></ion-router-outlet>
 </ion-app>

@@ -1,0 +1,16 @@
+<ion-list>
+    <ion-list-header>
+        Recent Conversations
+    </ion-list-header>
+
+    <ion-item routerLink="/insumo/{{product.id}}" *ngFor="let product of products">
+        <ion-avatar slot="start">
+            <img src="`${product.image}`">
+        </ion-avatar>
+        <ion-label>
+            <h2>{{product.name}}</h2>
+            <h3>Cantidad:{{product.stock}}</h3>
+            <p>Departamento: {{product.departament.area}}</p>
+        </ion-label>
+    </ion-item>
+</ion-list>

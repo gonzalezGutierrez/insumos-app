@@ -1,0 +1,76 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Dashboard</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="content-bg">
+        <div class="header-title">
+            <h3>Mis opciones</h3>
+            <span>{{dateCurrent | date:'yyyy-MM-dd'}}</span>
+        </div>
+        <div class="avatar">
+            <img src="https://scontent.ftgz1-1.fna.fbcdn.net/v/t1.0-9/p960x960/93702704_938782589869427_7822968791461003264_o.jpg?_nc_cat=100&_nc_sid=85a577&_nc_ohc=ugDAasROsscAX8YHEYh&_nc_ht=scontent.ftgz1-1.fna&_nc_tp=6&oh=0a35d4330f2c71d96b92419bcfba15c9&oe=5EEBD7F9" alt="">
+        </div>
+    </div>
+    <div class="content-cards">
+        <div class="grid">
+            <article class="card">
+                <div class="avatar">
+                    <img src="../../../assets/graph.png" alt="">
+                </div>
+                <div class="item">
+                    <span>Estadisticas</span>
+                </div>
+            </article>
+            <article class="card" routerLink="/insumos">
+                <div class="avatar">
+                    <img src="https://image.flaticon.com/icons/svg/2760/2760491.svg" alt="">
+                </div>
+                <div class="item">
+                    <span>Insumos</span>
+                </div>
+            </article>
+        </div>
+        <div class="grid">
+            <article class="card" routerLink="/departamentos">
+                <div class="avatar">
+                    <img src="../../../assets/hospital.png" alt="">
+                </div>
+                <div class="item">
+                    <span>Oficinas</span>
+                </div>
+            </article>
+            <article class="card" routerLink="/entrega">
+                <div class="avatar">
+                    <img src="../../../assets/en-linea.png" alt="">
+                </div>
+                <div class="item">
+                    <span>Entregas</span>
+                </div>
+            </article>
+        </div>
+        <div class="grid">
+            <article class="card">
+                <div class="avatar">
+                    <img src="../../../assets/senales.png" alt="">
+                </div>
+                <div class="item">
+                    <span>Offline</span>
+                </div>
+            </article>
+            <article class="card">
+                <div class="avatar">
+                    <img src="../../../assets/logout.png" alt="">
+                </div>
+                <div class="item">
+                    <span>Salir</span>
+                </div>
+            </article>
+        </div>
+    </div>
+</ion-content>

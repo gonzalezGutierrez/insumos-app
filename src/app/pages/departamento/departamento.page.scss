@@ -1,0 +1,45 @@
+.card {
+    background:#628cff;
+    padding: 10px;
+    width: 95%;
+    margin:auto;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border:1px solid #ccc;
+    box-shadow: 0px 1px 10px rgba(0,0,0,0.5);
+
+    display: flex;
+
+    .information {
+        display: flex;
+        flex-direction: column;
+
+        h4 {
+            text-transform: uppercase;
+            color:#fff;
+            padding-bottom: 0px !important;
+            letter-spacing: .4;
+        }
+
+        span {
+            color:#fff;
+        }
+    }
+}
+
+.top{
+    margin-top:20px;
+}
+
+.empyt-card {
+    background-color:#fefefe;
+    border:1px solid #ccc;
+    box-shadow: 0px 1px 10px rgba(0,0,0,0.5);
+    padding: 20px;
+    width: 95%;
+    border-radius: 4px;
+    margin: auto;
+    span{
+        text-transform: uppercase;
+    }
+}

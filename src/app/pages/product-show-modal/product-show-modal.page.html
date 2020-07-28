@@ -1,0 +1,40 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Detalle del producto</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
+        <mat-tab label="Producto">
+            <mat-card class="card">
+                <mat-card-title class="text-center">{{product.name}}</mat-card-title>
+                <mat-card-subtitle class="text-center">
+                    <mat-chip-list class="text-center" aria-label="Fish selection">
+                        <mat-chip color="primary" selected>Depto: {{product.departament.area}}</mat-chip>
+                        <mat-chip color="accent" selected>Existencia: {{product.stock}}</mat-chip>
+                    </mat-chip-list>
+                </mat-card-subtitle>
+                <mat-divider></mat-divider>
+                <mat-card-content class="content">
+                    <img mat-card [src]="product.image">
+                </mat-card-content>
+            </mat-card>
+        </mat-tab>
+        <mat-tab label="Descripción">
+            <mat-card class="card">
+                <mat-card-content>
+                    <mat-card-subtitle class="tex-center">Descripción</mat-card-subtitle>
+                    <div class="description">{{product.description}}</div>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="card">
+                <mat-card-content>
+                    <mat-card-subtitle class="tex-center">Compatibilidad</mat-card-subtitle>
+                    <div class="description">{{product.compatibility}}</div>
+                </mat-card-content>
+            </mat-card>
+        </mat-tab>
+        <mat-tab label="deliver"> Entrega</mat-tab>
+    </mat-tab-group>
+</ion-content>

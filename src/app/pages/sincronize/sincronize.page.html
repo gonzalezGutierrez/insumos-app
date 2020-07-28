@@ -1,0 +1,22 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Insumos</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card style="text-align: center;">
+        <img src="assets/logo.jpg" />
+        <ion-card-header>
+          <ion-card-subtitle>Sincronización matutina</ion-card-subtitle>
+          <ion-card-title>Insumos APP</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            Para poder utilizar la aplicación deberas hacer una sincronización cada mañana para obtener todos insumos actualizados del día. <br>
+            <ion-button (click)="onSincronize()">Sincronizar</ion-button>
+        </ion-card-content>
+      </ion-card>
+</ion-content>

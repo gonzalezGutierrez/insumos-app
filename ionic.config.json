@@ -1,5 +1,7 @@
 {
   "name": "insumos",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
