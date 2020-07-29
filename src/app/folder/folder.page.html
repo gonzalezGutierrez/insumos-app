@@ -3,12 +3,22 @@
         <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title>Modo offline</ion-title>
+        <ion-title>Sincronización</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <div (click)="addProduct();" class="action-button">
-        <ion-button>Guardar productos</ion-button>
-    </div>
+    <ion-card style="text-align: center;">
+        <img src="assets/logo.jpg" />
+        <ion-card-header>
+          <ion-card-subtitle>Sincronización al servidor</ion-card-subtitle>
+          <ion-card-title>Insumos APP</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            Sincroniza la información almacenada del telefono para poder visualizar los datos actualizados en el panel de administración.<br>
+            <ion-button (click)="onSincronize()">Sincronizar</ion-button>
+        </ion-card-content>
+      </ion-card>
 </ion-content>
+
+
