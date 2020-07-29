@@ -39,10 +39,6 @@ export class SincronizeService {
             });
         } catch (error) {
             alert("Error: " + error.message);
-        } finally {
-            alert("Sincronizacuón exitosa");
-            localStorage.setItem('sincronizacion-server', 'sincronizado');
-            this.router.navigate(['/home']);
         }
     }
 }

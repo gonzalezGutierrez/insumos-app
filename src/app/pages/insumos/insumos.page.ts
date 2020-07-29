@@ -10,8 +10,8 @@ import { DatabaseService } from 'src/app/services/database.service';
     styleUrls: ['./insumos.page.scss'],
 })
 export class InsumosPage implements OnInit {
-    
-    
+
+
     products: Observable<any[]>;
     constructor(private productS: ProductService,private db: DatabaseService) { }
 
@@ -19,23 +19,21 @@ export class InsumosPage implements OnInit {
 
         this.db.getDatabaseState().subscribe(rdy => {
             if (rdy) {
-                alert("DB ready");
                 this.products = this.db.getProducts();
             }
         });
-        
+
     }
 
     public async getProducts() {
         this.productS.getProductsCollection().subscribe((res:any)=>{
-            console.log(res.body.data);
             this.products = res.body.data;
         },(error)=>{
             if (error.status == 0) {
                 console.log('No hay conexion con el servidor');
             }
         });
-        
+
     }
 
 }

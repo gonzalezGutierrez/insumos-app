@@ -12,10 +12,12 @@ import { IProduct } from 'src/app/structures/products';
     styleUrls: ['./insumo.page.scss'],
 })
 export class InsumoPage implements OnInit {
+
     params: any;
     product: IProduct = { id:0, name:'', stock:0, image:'', departament:'' };
     departament: any = [];
     public amount;
+
     constructor(
         private productS: ProductService,
         private router: ActivatedRoute,
@@ -45,24 +47,25 @@ export class InsumoPage implements OnInit {
 
         try {
             let result = await this.db.addProductoToDelivery(this.product.id,this.amount,deliveryId);
-            
+
         } catch (error) {
             alert("Ha ocurrido un error agrendo el producto" + error.message);
         }finally{
             alert("Producto agregado correctamente");
+            this.route.navigate(['/entrega']);
         }
     }
 
     public async initial(deliveryId) {
         if (deliveryId == null) {
             try {
-                let result = await this.db.addDelivery(this.product.departamentId);
+                let result = await this.db.addDelivery();
                 localStorage.setItem('delivery_id',result.insertId);
             } catch (error) {
                 alert("Ha ocurrido un error" + error.message);
             }
         }
-       
+
     }
 
     async presentToast() {

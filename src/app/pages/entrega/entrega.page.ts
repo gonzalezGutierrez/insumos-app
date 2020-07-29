@@ -3,6 +3,8 @@ import { EntregaService } from 'src/app/services/entrega.service';
 import { MenuController, ToastController } from '@ionic/angular';
 import { DepartamentoService } from 'src/app/services/departamento.service';
 import { DatabaseService } from 'src/app/services/database.service';
+import { IDepartament } from 'src/app/structures/departament';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-entrega',
@@ -12,29 +14,33 @@ import { DatabaseService } from 'src/app/services/database.service';
 export class EntregaPage implements OnInit {
 
     public products:any = [];
-    public departamentos:any = [];
+    departamentos: IDepartament[] = [];
     public departamento;
+
     constructor(
         private entregaS: EntregaService,
         private menu: MenuController,
-        private  departamentS:DepartamentoService,
         public toastController: ToastController,
-        private db: DatabaseService
+        private db: DatabaseService,
+        private route: Router
     ){}
 
     ngOnInit() {
-        
+
         this.getProducts();
         this.getDepartamentos();
     }
 
     async getDepartamentos() {
-
-       
-       
-        /*let res:any = await this.departamentS.getDepartamentoCollection();
-        this.departamentos = res.data;
-        console.log(this.departamentos[0].area)*/
+        this.db.getDatabaseState().subscribe(rdy => {
+            if (rdy) {
+                this.db.getDepartaments().subscribe(departamenst=>{
+                   this.departamentos = departamenst;
+               },(error)=>{
+                   alert(error.message);
+               })
+            }
+        });
     }
 
     doRefresh(event) {
@@ -44,29 +50,29 @@ export class EntregaPage implements OnInit {
         }, 2000);
     }
 
-    async getProducts() 
+    async getProducts()
     {
         let deliveryId = localStorage.getItem('delivery_id');
-        alert(deliveryId);
         try {
             this.products = await this.db.loadProductsOfDelivery(deliveryId);
-        } catch (error) {   
+        } catch (error) {
             alert("Error al cargar los productos de la entrega: "+error.message);
         }
     }
 
     async onEnd()
     {
-        try{
-            let res:any = await this.entregaS.endDelivery(this.departamento);
-            this.entregaS.removeEntregaActual();
-            console.log(localStorage.getItem('entrega'));
-            this.presentToast();
-            this.products = [];
+        try {
+            let deliveryId = localStorage.getItem('delivery_id');
+            let res = await this.db.endDelivery(deliveryId,this.departamento);
         }catch(error){
-            console.log(error);
+            alert(error.message);
+        } finally {
+            localStorage.removeItem('delivery_id');
+            alert("La entrega fue terminada correctamente");
+            this.route.navigate(['/entregas']);
         }
-        
+
     }
     async presentToast() {
         const toast = await this.toastController.create({

@@ -50,7 +50,16 @@ const routes: Routes = [
   {
     path: 'sincronize',
     loadChildren: () => import('./pages/sincronize/sincronize.module').then( m => m.SincronizePageModule)
+  },
+  {
+    path: 'entregas',
+    loadChildren: () => import('./pages/entregas/entregas.module').then( m => m.EntregasPageModule)
+  },
+  {
+    path: 'entrega-detail/:id',
+    loadChildren: () => import('./pages/entrega-detail/entrega-detail.module').then( m => m.EntregaDetailPageModule)
   }
+
 ];
 
 @NgModule({

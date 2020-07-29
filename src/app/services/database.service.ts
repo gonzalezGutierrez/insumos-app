@@ -48,7 +48,8 @@ export class DatabaseService {
                         alert("Base de datos creada exitosamente");
 
                     }).catch(e => alert(e.message));
-            });
+            }
+        );
     }
 
     loadDepartaments() {
@@ -58,10 +59,9 @@ export class DatabaseService {
 
             if (data.rows.length > 0){
                 for (let i = 0; i < data.rows.length; i++){
-                    alert(data.rows.item(i).name);
                     departaments.push({ id: data.rows.item(i).id, name: data.rows.item(i).name, encargado: data.rows.item(i).responsable });
                 }
-                
+
             }
             this.departament.next(departaments);
 
@@ -132,21 +132,48 @@ export class DatabaseService {
     }
 
     loadProductsOfDelivery(delivery_id):Promise<any[]> {
-        let query = 'SELECT products.id as productId, products.name as productName, products.img as productImage, prod_delivery.amount FROM delivery JOIN prod_delivery ON delivery.id = prod_delivery.id JOIN products ON  prod_delivery.product_id = products.id where delivery.id = ?';
-        return this.database.executeSql(query,[delivery_id]).then(data=>{
-            let entrega = [];
+        let query = 'SELECT products.*,  prod_delivery.amount FROM prod_delivery JOIN products ON prod_delivery.product_id = products.id where prod_delivery.delivery_id = ?';
+        return this.database.executeSql(query, [delivery_id]).then(data => {
+            let products = [];
             if (data.rows.length > 0) {
-                for(let i = 0; i < data.rows.length; i++) {
-                    alert(data.rows.item(i).productName);
-                    entrega.push({
-                        productId:data.rows.item(i).productId,
-                        image:data.rows.item(i).productImage,
-                        amunt:data.rows.item(i).amount,
-                        productName:data.rows.item(i).productName
+                for (var i = 0; i < data.rows.length; i++) {
+                    products.push({
+                        productId: data.rows.item(i).id,
+                        image: data.rows.item(i).img,
+                        amount: data.rows.item(i).amount,
+                        productName: data.rows.item(i).name
                     });
                 }
             }
-            return entrega;
+            return products;
+        })
+    }
+
+    loadDeliveries(status:number) : Promise<any[]> {
+        let query = 'SELECT departaments.name , departaments.id , delivery.id as deliveryId  FROM delivery JOIN departaments ON delivery.departament_id = departaments.id where delivery.status_delivery = ?';
+        return this.database.executeSql(query, [status]).then(data => {
+            let deliveries = [];
+            if (data.rows.length > 0) {
+                for (var i = 0; i < data.rows.length; i++) {
+                    deliveries.push({
+                        name: data.rows.item(i).name,
+                        id: data.rows.item(i).id,
+                        deliveryId:data.rows.item(i).deliveryId
+                    });
+                }
+            }
+            return deliveries;
+        });
+    }
+
+    loadDelivery(deliveryId) {
+        let sql = 'SELECT departaments.name , departaments.id , delivery.id as deliveryId, delivery.status_delivery  FROM delivery JOIN departaments ON delivery.departament_id = departaments.id where delivery.id = ?';
+        return this.database.executeSql(sql, [deliveryId]).then(data => {
+            return {
+                departament: data.rows.item(0).name,
+                departamentId: data.rows.item(0).id,
+                status:data.rows.item(0).status_delivery
+            }
         });
     }
 
@@ -176,10 +203,17 @@ export class DatabaseService {
         });
     }
 
-    addDelivery (departament_id:number) { //departament_id
-        let data = [departament_id];
-        let sql = "INSERT INTO delivery(departament_id) VALUES(?)";
+    addDelivery () { //departament_id
+        let data = [0];
+        let sql = "INSERT INTO delivery(status_delivery) VALUES(?)";
         return this.database.executeSql(sql,data);
+    }
+
+    endDelivery(deliveryId,departamento) {
+        let query = 'UPDATE delivery SET status_delivery = ?, departament_id = ?   where id = ?';
+        return this.database.executeSql(query, [1, departamento , deliveryId]).then(data => {
+            return "Terminado correctamente";
+        }).catch(error => alert(error.message));
     }
 
     getDatabaseState() {

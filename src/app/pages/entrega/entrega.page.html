@@ -13,7 +13,7 @@
         <ion-item>
             <ion-label>Departamento</ion-label>
             <ion-select value="" [(ngModel)]="departamento" okText="Ok" cancelText="Cancelar">
-                <ion-select-option *ngFor="let departamento of departamentos" [value]="departamento.id">{{departamento.area}}</ion-select-option>
+                <ion-select-option *ngFor="let departamento of departamentos" [value]="departamento.id">{{departamento.name}}</ion-select-option>
             </ion-select>
         </ion-item>
     </ion-list>
