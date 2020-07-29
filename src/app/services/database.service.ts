@@ -209,9 +209,9 @@ export class DatabaseService {
         return this.database.executeSql(sql,data);
     }
 
-    endDelivery(deliveryId,departamento) {
+    endDelivery(deliveryId,departamento,status) {
         let query = 'UPDATE delivery SET status_delivery = ?, departament_id = ?   where id = ?';
-        return this.database.executeSql(query, [1, departamento , deliveryId]).then(data => {
+        return this.database.executeSql(query, [status, departamento , deliveryId]).then(data => {
             return "Terminado correctamente";
         }).catch(error => alert(error.message));
     }
@@ -226,6 +226,38 @@ export class DatabaseService {
 
     getDepartaments():Observable<IDepartament[]> {
         return this.departament.asObservable();
+    }
+
+
+    cleanDeliveries() {
+        let sql = 'DELETE FROM delivery';
+        return this.database.executeSql(sql).then(data => {
+            return "Eliminado";
+        });
+    }
+    cleanProducts() {
+        let sql = 'update sqlite_sequence set seq=0 where name=products';
+        return this.database.executeSql(sql).then(data => {
+            return "Eliminado";
+        });
+    }
+    cleanDepartaments() {
+        let sql = 'update sqlite_sequence set seq=0 where name=departaments';
+        return this.database.executeSql(sql).then(data => {
+            return "Eliminado";
+        });
+    }
+
+
+
+    //cargas al servidor
+
+    async sendDeliveries(departamentId,products:any[]) {
+        return this.http.post('https://stark-tor-96627.herokuapp.com/api/entregas',{
+            'departament_id': departamentId,
+            'products': products,
+            'user_id':1
+        }).toPromise();
     }
 
 

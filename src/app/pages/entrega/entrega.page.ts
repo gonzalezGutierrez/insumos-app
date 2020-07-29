@@ -64,7 +64,7 @@ export class EntregaPage implements OnInit {
     {
         try {
             let deliveryId = localStorage.getItem('delivery_id');
-            let res = await this.db.endDelivery(deliveryId,this.departamento);
+            let res = await this.db.endDelivery(deliveryId,this.departamento,1);
         }catch(error){
             alert(error.message);
         } finally {
