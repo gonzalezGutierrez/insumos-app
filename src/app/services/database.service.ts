@@ -241,7 +241,7 @@ export class DatabaseService {
     }
     async cleanDepartaments() {
         let sql = 'DELETE FROM departaments';
-        return await  this.database.executeSql(sql);
+        return await this.database.executeSql(sql);
     }
 
 

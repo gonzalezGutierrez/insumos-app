@@ -5,6 +5,7 @@ import { IDepartament } from 'src/app/structures/departament';
 import { IProduct } from 'src/app/structures/products';
 import { Router } from '@angular/router';
 import { ToastController,LoadingController  } from '@ionic/angular';
+import { DatabaseService } from 'src/app/services/database.service';
 
 @Component({
     selector: 'app-sincronize',
@@ -18,7 +19,8 @@ export class SincronizePage implements OnInit {
         private sinc: SincronizeService,
         private router: Router,
         public toastController: ToastController,
-        public loadingController: LoadingController
+        public loadingController: LoadingController,
+        public db:DatabaseService
     ) { }
 
     ngOnInit() {
@@ -51,6 +53,14 @@ export class SincronizePage implements OnInit {
 
     onSincronize() {
         this.presentLoading();
+
+        try {
+            this.db.cleanDepartaments();
+            this.db.cleanProducts();
+        } catch (error) {
+            
+        }
+
         try {
             this.network.networkApiGET('/departamentos').then((response: any) => {
 
