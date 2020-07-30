@@ -52,10 +52,15 @@ export class FolderPage implements OnInit {
 
         try {
             let response: any = await this.db.sendDeliveries(entrega.id, products);
-            await this.db.endDelivery(entrega.deliveryId,entrega.id,2);
+            await this.db.endDelivery(entrega.deliveryId, entrega.id, 2);
+
+            await this.db.cleanProducts();
+            await this.db.cleanDepartaments();
+
         } catch (error) {
             alert("Error: " + error.message);
         } finally {
+
             alert("La sincronización fue realizada con exito...");
             this.router.navigate(['sincronize']);
         }

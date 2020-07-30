@@ -235,17 +235,13 @@ export class DatabaseService {
             return "Eliminado";
         });
     }
-    cleanProducts() {
-        let sql = 'update sqlite_sequence set seq=0 where name=products';
-        return this.database.executeSql(sql).then(data => {
-            return "Eliminado";
-        });
+    async cleanProducts() {
+        let sql = 'DELETE FROM products';
+        return await this.database.executeSql(sql);
     }
-    cleanDepartaments() {
-        let sql = 'update sqlite_sequence set seq=0 where name=departaments';
-        return this.database.executeSql(sql).then(data => {
-            return "Eliminado";
-        });
+    async cleanDepartaments() {
+        let sql = 'DELETE FROM departaments';
+        return await  this.database.executeSql(sql);
     }
 
 
